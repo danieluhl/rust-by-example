@@ -27,8 +27,12 @@ struct Rectangle {
 
 fn rect_area(rect: Rectangle) -> f32 {
   let Rectangle { top_left: Point { x: x1, y: y1}, bottom_right: Point { x: x2, y: y2}} = rect;
-  println!("rect destructure results: {} {} {} {}", x1, y1, x2, y2);
   (((x1 - x2) * (y1 - y2) * 100f32).abs()).round() / 100f32
+}
+
+fn square(point: Point, width: f32) -> Rectangle {
+  let Point {x, y} = point;
+  Rectangle {top_left: point, bottom_right: Point {x: x + width, y: y + width } }
 }
 
 fn main() {
@@ -80,4 +84,7 @@ fn main() {
     let Pair(integer, decimal) = pair;
 
     println!("pair contains {:?} and {:?}", integer, decimal);
+    let newPoint = Point { x: 10f32, y: 10f32 };
+    let newRect = square(newPoint, 10f32);
+    println!("square area: {}", rect_area(newRect));
 }
